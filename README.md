@@ -13,6 +13,7 @@ Code Chaos is a project intended for a bit of fun as well as an experiment of wh
 3. Logic by other members intent must remain, but it can be extended.
 4. Third party open source libraries are ok to use.
 5. The end intent of each individual is to remain quiet.
+6. Keep it PC, workplace rules apply.
 
 ## Specific Rules
 1. Maven will be used to manage dependencies.
