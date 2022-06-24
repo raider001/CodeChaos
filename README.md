@@ -1,11 +1,12 @@
 # CodeChaos
 ## What is this?
-Code Chaos is a project intended for a bit of fun as well as an experiment of what an output is when 
-
+Code Chaos is a project intended for a bit of fun as well as an experiment
 ## How to play
 1. Each member has the opportunity to work independently for a week in terms of implementing/extending a code base. 
 2. That member has full control and discretion of the direction of the code base for that week.
 3. That team member can discuss and ask help and guidance on where the code base goes.
+4. After a week, the project is handed to the next member.
+5. This process continues until we get bored.
 
 ## Rules
 1. No other members can provide direction or discuss the way they wish to take the code base.
