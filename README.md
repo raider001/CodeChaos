@@ -12,8 +12,11 @@ Code Chaos is a project intended for a bit of fun as well as an experiment of wh
 2. The code must compile and run.
 3. Logic by other members intent must remain, but it can be extended.
 4. Third party open source libraries are ok to use.
+5. The end intent of each individual is to remain quiet.
 
 ## Specific Rules
 1. Maven will be used to manage dependencies.
 2. The project must be Java. This rule may be expempt if other technologies/languages are use to communicate with the main java application.
 
+## Future Rules
+1. If the project goes on for an extended period of time and the code base grows, it will then be open to be worked on by parallel by more than one person.
