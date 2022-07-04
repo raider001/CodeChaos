@@ -1,29 +1,26 @@
-package src.main.java;
+package game;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameManager {
 	
 	private GameGraphics gameGraphics;
-	
-	private long cycleTime = 0;
-	private long sleepTime = 0;
-	private boolean running = true;
 
-	private long speed = 70;
+	private final boolean running = true;
+	private final long speed = 70;
 	
-	public GameManager(GameGraphics gameGraphics){
-		this.gameGraphics = gameGraphics;
+	public GameManager(){
+		GridManager gridManager = new GridManager();
+		this.gameGraphics = new GameGraphics(gridManager);
 	}
 	
 	public void beginGame() {
-
 		while (running) {
-			cycleTime = System.currentTimeMillis();
-			gameGraphics.movePlayer();
 			gameGraphics.renderGame();
+			gameGraphics.movementProcessor.processMove(Direction.RIGHT);
+			long cycleTime = System.currentTimeMillis();
 			cycleTime = System.currentTimeMillis() - cycleTime;
-			sleepTime = speed - cycleTime;
+			long sleepTime = speed - cycleTime;
 			if (sleepTime < 0)
 				sleepTime = 0;
 			try {
@@ -31,6 +28,7 @@ public class GameManager {
 			} catch (InterruptedException ex) {
 				Logger.getLogger(GameManager.class.getName()).log(Level.SEVERE, null,
 						ex);
+				Thread.currentThread().interrupt();
 			}
 		}
 	}
