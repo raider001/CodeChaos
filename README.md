@@ -16,6 +16,19 @@ Code Chaos is a project intended for a bit of fun as well as an experiment
 5. The end intent of each individual is to remain quiet.
 6. Keep it PC, workplace rules apply.
 
+## Project Setup
+### Eclipse
+1. Open Eclipse, navigate to file/import
+2. Select Maven/Existing Maven Projects
+3. Right click pom.xml, select Maven and click update project.
+
+You're done!
+### IntelliJ
+1. Open IntelliJ, select File/Open and select your project.
+2. Right click pom.xml, select Maven and click reload project.
+
+You're done!
+
 ## Specific Rules
 1. Maven will be used to manage dependencies.
 2. The project must be Java. This rule may be expempt if other technologies/languages are use to communicate with the main java application.

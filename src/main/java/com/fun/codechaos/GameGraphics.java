@@ -1,4 +1,5 @@
-package src.main.java;
+package com.fun.codechaos;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,7 +16,7 @@ import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 
 public class GameGraphics implements KeyListener, WindowListener {
-	
+	 
 	private Frame frame = null;
 	private Canvas canvas = null;
 	private Graphics graph = null;

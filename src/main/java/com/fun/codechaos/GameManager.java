@@ -1,4 +1,5 @@
-package src.main.java;
+package com.fun.codechaos;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
