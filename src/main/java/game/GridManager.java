@@ -50,12 +50,12 @@ public class GridManager {
         Objects.requireNonNull(newLoc);
         Objects.requireNonNull(locType);
 
-        setLocationType(previousLoc, locType);
+        setLocationType(previousLoc, LocationType.EMPTY);
 
         if (getLocationType(newLoc) != LocationType.EMPTY) {
-            LocationType locOverridenType = collisionManager.detectCollision(getLocationType(newLoc), locType);
-            setLocationType(newLoc, locOverridenType);
-            setLocationType(previousLoc, locOverridenType);
+            LocationType collisionDetectionLocType = collisionManager.detectCollision(getLocationType(newLoc), locType);
+            setLocationType(newLoc, collisionDetectionLocType);
+            setLocationType(previousLoc, collisionDetectionLocType);
         }
 
         setLocationType(newLoc, locType);

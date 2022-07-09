@@ -1,5 +1,6 @@
 package game;
 
+import game.display.GameGraphics;
 import game.key_processors.MoveProcessor;
 import game.key_processors.SpellProcessor;
 import game.objects.Enemy;

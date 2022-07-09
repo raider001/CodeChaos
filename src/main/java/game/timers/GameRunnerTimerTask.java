@@ -1,6 +1,6 @@
 package game.timers;
 
-import game.GameGraphics;
+import game.display.GameGraphics;
 import game.key_processors.MoveProcessor;
 import game.objects.Player;
 
