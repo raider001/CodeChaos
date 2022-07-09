@@ -1,31 +1,95 @@
 package game;
 
+import game.utils.Dimensions;
+import game.utils.Location;
+import game.utils.enums.LocationType;
+
+import java.util.Objects;
+
+/**
+ * Manages the grid of the game.
+ */
 public class GridManager {
 
-    public LocationType[][] grid = null;
+    private final CollisionManager collisionManager;
+    private LocationType[][] grid = null;
 
-    public GridManager(){
-        grid = new LocationType[gameSize][gameSize];
-        for (int i = 0; i < gameSize; i++) {
-            for (int j = 0; j < gameSize; j++) {
-                grid[i][j] = LocationType.EMPTY;
+    public GridManager() {
+        setGrid(new LocationType[Dimensions.GAME_SIZE][Dimensions.GAME_SIZE]);
+        for (int i = 0; i < Dimensions.GAME_SIZE; i++) {
+            for (int j = 0; j < Dimensions.GAME_SIZE; j++) {
+                getGrid()[i][j] = LocationType.EMPTY;
             }
         }
 
-        grid[gameSize / 2][gameSize / 2] = LocationType.PLAYER;
+        getGrid()[Dimensions.GAME_SIZE / 2][Dimensions.GAME_SIZE / 2] =
+                LocationType.PLAYER;
+
+        collisionManager = new CollisionManager();
     }
 
-    public void updateGrid(int futX, int futY){
-        for (int i = 0; i < grid.length; i++){
-            for (int j = 0; j < grid[i].length; j++){
-                grid[i][j] = LocationType.EMPTY;
-            }
+    public LocationType[][] getGrid() {
+        return grid;
+    }
+
+    public void setGrid(LocationType[][] grid) {
+        this.grid = grid;
+    }
+
+
+    /**
+     * Updates the grid with the new player's location by blanking out every
+     * square except for the location passed.
+     *
+     * @param previousLoc Previous location.
+     * @param newLoc      New Location.
+     * @param locType     The new location type.
+     */
+    public void updateGridWithLocType(Location previousLoc, Location newLoc, LocationType locType) {
+        Objects.requireNonNull(previousLoc);
+        Objects.requireNonNull(newLoc);
+        Objects.requireNonNull(locType);
+
+        setLocationType(previousLoc, locType);
+
+        if (getLocationType(newLoc) != LocationType.EMPTY) {
+            LocationType locOverridenType = collisionManager.detectCollision(getLocationType(newLoc), locType);
+            setLocationType(newLoc, locOverridenType);
+            setLocationType(previousLoc, locOverridenType);
         }
-;        grid[futX][futY] = LocationType.PLAYER;
+
+        setLocationType(newLoc, locType);
     }
 
+    /**
+     * Adds an enemy type to the grid.
+     *
+     * @param loc     The location to add the enemy.
+     * @param locType The enemy's location type.
+     */
+    public void addEnemyToGrid(Location loc, LocationType locType) {
+        Objects.requireNonNull(loc);
+        Objects.requireNonNull(locType);
+        setLocationType(loc, locType);
+    }
 
-    public int height = 600;
-    public int width = 600;
-    public final int gameSize = 40;
+    /**
+     * Clears a cell.
+     *
+     * @param location The cell's location.
+     */
+    public void clearCell(Location location) {
+        Objects.requireNonNull(location);
+        setLocationType(location, LocationType.EMPTY);
+    }
+
+    private LocationType getLocationType(Location location) {
+        Objects.requireNonNull(location);
+        return getGrid()[location.getXLoc()][location.getYLoc()];
+    }
+
+    private void setLocationType(Location location, LocationType locationType) {
+        Objects.requireNonNull(location);
+        getGrid()[location.getXLoc()][location.getYLoc()] = locationType;
+    }
 }
