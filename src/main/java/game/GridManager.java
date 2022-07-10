@@ -52,10 +52,12 @@ public class GridManager {
 
         setLocationType(previousLoc, LocationType.EMPTY);
 
+
         if (getLocationType(newLoc) != LocationType.EMPTY) {
             LocationType collisionDetectionLocType = collisionManager.detectCollision(getLocationType(newLoc), locType);
             setLocationType(newLoc, collisionDetectionLocType);
             setLocationType(previousLoc, collisionDetectionLocType);
+            return;
         }
 
         setLocationType(newLoc, locType);

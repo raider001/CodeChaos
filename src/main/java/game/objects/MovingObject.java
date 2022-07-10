@@ -6,11 +6,11 @@ import game.utils.enums.Direction;
 /**
  * All objects that can move extend from this.
  */
-public class MovingObject extends GameObject {
+public abstract class MovingObject extends GameObject {
 
     private Direction currentDirection;
 
-    public MovingObject(Location location, Direction direction) {
+    protected MovingObject(Location location, Direction direction) {
         super(location);
         this.currentDirection = direction;
     }
