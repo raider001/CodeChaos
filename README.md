@@ -55,8 +55,8 @@ To try to keep tabs on who's turn it is the following is the roster code chaos r
 
 | Member                   | Turn  |
 |--------------------------|-------|
-|@shadowfantasy95          |       |
 |@BeefSupreme101           |       |
+|@shadowfantasy95          |       |
 |Chaos Member 1            | <--   |
 |@raider001, Chaos Member 2|       |
 |Chaos Member 3, 4         |       |
