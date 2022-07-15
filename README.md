@@ -44,3 +44,20 @@ You're done!
 
 1. If the project goes on for an extended period of time and the code base grows, it will then be open to be worked on
    by parallel by more than one person.
+2. It is up to the discression of each current working members in parallel on if they work with their pair or alone.
+3. Working pairs will be randomised.
+
+## Reccomendations
+1. Push small and push often. Trust me, you dont want to get stuck with a large merge conflict when you don't know what the other person is doing...
+
+## Roster
+To try to keep tabs on who's turn it is the following is the roster code chaos roster.
+
+| Member                   | Turn  |
+|--------------------------|-------|
+|@shadowfantasy95          |       |
+|@BeefSupreme101           |       |
+|Chaos Member 1            | <--   |
+|@raider001, Chaos Member 2|       |
+|Chaos Member 3, 4         |       |
+
