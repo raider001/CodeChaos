@@ -47,7 +47,7 @@ You're done!
 2. It is up to the discression of each current working members in parallel on if they work with their pair or alone.
 3. Working pairs will be randomised.
 
-## Reccomendations
+## Recomendations
 1. Push small and push often. Trust me, you dont want to get stuck with a large merge conflict when you don't know what the other person is doing...
 
 ## Roster
