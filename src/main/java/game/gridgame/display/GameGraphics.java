@@ -64,7 +64,7 @@ public class GameGraphics extends Canvas {
                     for (int j = 0; j < Dimensions.GAME_SIZE; j++) {
                         LocationType gridCase = gridManager.getGrid()[i][j];
                         Image img = imageStore.getImage(gridCase.getImage());
-                        graph.drawImage(img, i * gridUnit, j * gridUnit, null);
+                        graph.drawImage(img, i * gridUnit, j * gridUnit,Dimensions.GAME_SIZE, Dimensions.GAME_SIZE, null);
                     }
                 }
 
