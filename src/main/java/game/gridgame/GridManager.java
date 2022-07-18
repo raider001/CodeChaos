@@ -1,4 +1,4 @@
-package game;
+package game.gridgame;
 
 import game.utils.Dimensions;
 import game.utils.Location;
@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class GridManager {
 
-    private final CollisionManager collisionManager;
+    private final GridCollisionManager collisionManager;
     private LocationType[][] grid = null;
 
     public GridManager() {
@@ -25,7 +25,7 @@ public class GridManager {
         getGrid()[Dimensions.GAME_SIZE / 2][Dimensions.GAME_SIZE / 2] =
                 LocationType.PLAYER;
 
-        collisionManager = new CollisionManager();
+        collisionManager = new GridCollisionManager();
     }
 
     public LocationType[][] getGrid() {

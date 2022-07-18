@@ -1,12 +1,13 @@
-package game.timers;
+package game.gridgame.timers;
 
-import game.GridManager;
+import game.gridgame.GridManager;
 import game.objects.Enemy;
 import game.utils.Dimensions;
 import game.utils.Location;
 import game.utils.enums.EnemyType;
 import game.utils.enums.LocationType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.TimerTask;
@@ -16,12 +17,11 @@ import java.util.TimerTask;
  */
 public class EnemyGeneratorTimerTask extends TimerTask {
 
-    private final List<Enemy> enemies;
+    private final List<Enemy> enemies = new ArrayList<>();
     private final GridManager gridManager;
     private final Random rand = new Random();
 
-    public EnemyGeneratorTimerTask(List<Enemy> enemies, GridManager gridManager) {
-        this.enemies     = enemies;
+    public EnemyGeneratorTimerTask(GridManager gridManager) {
         this.gridManager = gridManager;
     }
 

@@ -1,7 +1,7 @@
-package game.timers;
+package game.gridgame.timers;
 
-import game.display.GameGraphics;
-import game.key_processors.MoveProcessor;
+import game.gridgame.display.GameGraphics;
+import game.gridgame.key_processors.MoveProcessor;
 import game.objects.Player;
 
 import java.util.TimerTask;

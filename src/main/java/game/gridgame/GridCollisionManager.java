@@ -1,13 +1,17 @@
-package game;
+package game.gridgame;
 
 import game.utils.enums.LocationType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 /**
  * Detects collisions between objects and returns which type the locations should be.
  */
-public class CollisionManager {
+public class GridCollisionManager {
+
+    private static final Logger LOGGER = LogManager.getLogger(GridCollisionManager.class);
 
     /**
      * Detects a collision and returns what the grid cell type should be.
@@ -37,12 +41,12 @@ public class CollisionManager {
         Objects.requireNonNull(newType);
 
         if (oldType == LocationType.PLAYER && (newType == LocationType.GHOST || newType == LocationType.RAT)) {
-            System.out.println("Oh no you got hit by " + newType);
+            LOGGER.debug("Oh no you got hit by " + newType);
             return newType;
         }
 
         if (newType == LocationType.PLAYER && (oldType == LocationType.GHOST || oldType == LocationType.RAT)) {
-            System.out.println("Oh no you got hit by " + oldType);
+            LOGGER.debug("Oh no you got hit by " + oldType);
             return oldType;
         }
         return null;
@@ -55,13 +59,13 @@ public class CollisionManager {
 
         if ((oldType == LocationType.ENERGY && newType == LocationType.GHOST) ||
             (newType == LocationType.ENERGY && oldType == LocationType.GHOST)) {
-            System.out.println("You destroyed " + newType + " with " + oldType);
+            LOGGER.debug("You destroyed " + newType + " with " + oldType);
             return LocationType.EMPTY;
         }
 
         if ((oldType == LocationType.FIRE && newType == LocationType.RAT) ||
             (newType == LocationType.FIRE && oldType == LocationType.RAT)) {
-            System.out.println("You destroyed " + newType + " with " + oldType);
+            LOGGER.debug("You destroyed " + newType + " with " + oldType);
             return LocationType.EMPTY;
         }
         return null;
@@ -74,13 +78,13 @@ public class CollisionManager {
 
         if ((oldType == LocationType.FIRE && newType == LocationType.GHOST) ||
             (newType == LocationType.FIRE && oldType == LocationType.GHOST)) {
-            System.out.println(newType + " does not effect " + oldType);
+            LOGGER.debug(newType + " does not effect " + oldType);
             return LocationType.GHOST;
         }
 
         if ((oldType == LocationType.ENERGY && newType == LocationType.RAT) ||
             (newType == LocationType.ENERGY && oldType == LocationType.RAT)) {
-            System.out.println(newType + " does not effect " + oldType);
+            LOGGER.debug(newType + " does not effect " + oldType);
             return LocationType.RAT;
         }
         return null;

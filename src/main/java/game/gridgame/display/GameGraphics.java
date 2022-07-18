@@ -1,8 +1,9 @@
-package game.display;
+package game.gridgame.display;
 
-import game.GridManager;
-import game.key_processors.MoveProcessor;
-import game.key_processors.SpellProcessor;
+import game.gridgame.GridManager;
+import game.GameFrame;
+import game.gridgame.key_processors.MoveProcessor;
+import game.gridgame.key_processors.SpellProcessor;
 import game.utils.Dimensions;
 import game.utils.enums.LocationType;
 
@@ -12,54 +13,38 @@ import java.awt.image.BufferStrategy;
 /**
  * Displays the game.
  */
-public class GameGraphics {
+public class GameGraphics extends Canvas {
 
     private final GridManager gridManager;
     private final KeyManager keyManager;
-    private final WindowManager windowManager;
-
-    private final Frame frame;
-    private final Canvas canvas;
+    private final GameFrame frame;
     private Graphics graph = null;
     private BufferStrategy strategy = null;
 
-    public GameGraphics(GridManager gridManager, MoveProcessor moveProcessor,
-                        SpellProcessor spellProcessor) {
-        super();
+    public GameGraphics(GameFrame gameFrame, GridManager gridManager, MoveProcessor moveProcessor,  SpellProcessor spellProcessor) {
         this.gridManager = gridManager;
-        frame            = new Frame();
-        canvas           = new Canvas();
-        keyManager       = new KeyManager(moveProcessor, spellProcessor, frame, canvas);
-        windowManager    = new WindowManager();
-        initGraphics();
+        frame            = gameFrame;
+        keyManager       = new KeyManager(moveProcessor, spellProcessor, frame, this);
     }
 
-    private void initGraphics() {
-        frame.setSize(Dimensions.getWidth() + 7, Dimensions.getHeight() + 27);
-        frame.setResizable(false);
-        frame.setLocationByPlatform(true);
-        canvas.addKeyListener(keyManager);
-        canvas.setSize(Dimensions.getWidth() + 7, Dimensions.getHeight() + 27);
-        frame.add(canvas);
-        frame.addWindowListener(windowManager);
-        frame.dispose();
-        frame.validate();
-        frame.setTitle("Bilby Adventure!");
-        frame.setVisible(true);
+    public void startGame() {
+        addKeyListener(keyManager);
 
-        canvas.setIgnoreRepaint(true);
-        canvas.setBackground(Color.WHITE);
+        setSize(frame.getSize());
 
-        canvas.createBufferStrategy(2);
+        setIgnoreRepaint(true);
+        setBackground(Color.WHITE);
 
-        strategy = canvas.getBufferStrategy();
-        graph    = strategy.getDrawGraphics();
+        createBufferStrategy(2);
+
+        strategy = getBufferStrategy();
+        graph = strategy.getDrawGraphics();
 
         renderGame();
     }
 
     public void renderGame() {
-        canvas.paint(graph);
+        paint(graph);
 
         do {
             do {
@@ -76,6 +61,7 @@ public class GameGraphics {
                 for (int i = 0; i < Dimensions.GAME_SIZE; i++) {
                     for (int j = 0; j < Dimensions.GAME_SIZE; j++) {
                         LocationType gridCase = gridManager.getGrid()[i][j];
+
                         graph.setColor(gridCase.getColour());
                         graph.fillRect(i * gridUnit, j * gridUnit, gridUnit, gridUnit);
                     }
@@ -89,7 +75,7 @@ public class GameGraphics {
             // Draw image from buffer
             strategy.show();
             Toolkit.getDefaultToolkit().sync();
-            canvas.requestFocus();
+            requestFocus();
         } while (strategy.contentsLost());
     }
 }

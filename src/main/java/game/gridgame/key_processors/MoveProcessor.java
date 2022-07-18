@@ -1,6 +1,6 @@
-package game.key_processors;
+package game.gridgame.key_processors;
 
-import game.GridManager;
+import game.gridgame.GridManager;
 import game.objects.Player;
 import game.utils.Dimensions;
 import game.utils.Location;

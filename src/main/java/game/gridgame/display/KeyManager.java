@@ -1,7 +1,7 @@
-package game.display;
+package game.gridgame.display;
 
-import game.key_processors.MoveProcessor;
-import game.key_processors.SpellProcessor;
+import game.gridgame.key_processors.MoveProcessor;
+import game.gridgame.key_processors.SpellProcessor;
 import game.utils.Dimensions;
 import game.utils.enums.Direction;
 

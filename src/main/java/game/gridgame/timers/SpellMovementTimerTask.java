@@ -1,6 +1,6 @@
-package game.timers;
+package game.gridgame.timers;
 
-import game.GridManager;
+import game.gridgame.GridManager;
 import game.objects.Spell;
 import game.utils.Dimensions;
 import game.utils.Location;

@@ -1,10 +1,10 @@
-package game.key_processors;
+package game.gridgame.key_processors;
 
-import game.GameManager;
-import game.GridManager;
+import game.gridgame.GridGameManager;
+import game.gridgame.GridManager;
 import game.objects.Player;
 import game.objects.Spell;
-import game.timers.SpellMovementTimerTask;
+import game.gridgame.timers.SpellMovementTimerTask;
 import game.utils.enums.SpellType;
 
 import java.util.Timer;
@@ -30,8 +30,8 @@ public class SpellProcessor {
     public void castSpell() {
         Spell spell = new Spell(currentSpellType, player.getLocation(), player.getDirection());
         Timer spellTimer = new Timer();
-        spellTimer.schedule(new SpellMovementTimerTask(spell, gridManager), GameManager.SPELL_DELAY,
-                            GameManager.SPELL_PERIOD);
+        spellTimer.schedule(new SpellMovementTimerTask(spell, gridManager), GridGameManager.SPELL_DELAY,
+                            GridGameManager.SPELL_PERIOD);
     }
 
     /**
