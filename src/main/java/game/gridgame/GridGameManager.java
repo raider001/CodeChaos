@@ -46,8 +46,8 @@ public class GridGameManager {
         imageStore.addImage("mage", Path.of("images/mage.png"));
         imageStore.addImage("ghost", Path.of("images/ghost.png"));
         imageStore.addImage("rat", Path.of("images/crudeMouse.png"));
-        imageStore.addImage("energy", Path.of("images/electricity.png"));
-        imageStore.addImage("fire", Path.of("images/fireball.png"));
+        imageStore.addImage("electricity", Path.of("images/electricity.png"));
+        imageStore.addImage("fireball", Path.of("images/fireball.png"));
         /*
          TODO - This is a little strange pulling the dependency from one injector to another...
          It may make more sense having the frame containing the canvases to determine which one should be used. rather than
