@@ -2,7 +2,7 @@ package game.gridgame;
 
 import game.utils.Dimensions;
 import game.utils.Location;
-import game.utils.enums.LocationType;
+import game.utils.enums.EntityType;
 
 import java.util.Objects;
 
@@ -12,27 +12,27 @@ import java.util.Objects;
 public class GridManager {
 
     private final GridCollisionManager collisionManager;
-    private LocationType[][] grid = null;
+    private EntityType[][] grid = null;
 
     public GridManager() {
-        setGrid(new LocationType[Dimensions.GAME_SIZE][Dimensions.GAME_SIZE]);
+        setGrid(new EntityType[Dimensions.GAME_SIZE][Dimensions.GAME_SIZE]);
         for (int i = 0; i < Dimensions.GAME_SIZE; i++) {
             for (int j = 0; j < Dimensions.GAME_SIZE; j++) {
-                getGrid()[i][j] = LocationType.EMPTY;
+                getGrid()[i][j] = EntityType.EMPTY;
             }
         }
 
         getGrid()[Dimensions.GAME_SIZE / 2][Dimensions.GAME_SIZE / 2] =
-                LocationType.PLAYER;
+                EntityType.PLAYER;
 
         collisionManager = new GridCollisionManager();
     }
 
-    public LocationType[][] getGrid() {
+    public EntityType[][] getGrid() {
         return grid;
     }
 
-    public void setGrid(LocationType[][] grid) {
+    public void setGrid(EntityType[][] grid) {
         this.grid = grid;
     }
 
@@ -45,16 +45,16 @@ public class GridManager {
      * @param newLoc      New Location.
      * @param locType     The new location type.
      */
-    public void updateGridWithLocType(Location previousLoc, Location newLoc, LocationType locType) {
+    public void updateGridWithLocType(Location previousLoc, Location newLoc, EntityType locType) {
         Objects.requireNonNull(previousLoc);
         Objects.requireNonNull(newLoc);
         Objects.requireNonNull(locType);
 
-        setLocationType(previousLoc, LocationType.EMPTY);
+        setLocationType(previousLoc, EntityType.EMPTY);
 
 
-        if (getLocationType(newLoc) != LocationType.EMPTY) {
-            LocationType collisionDetectionLocType = collisionManager.detectCollision(getLocationType(newLoc), locType);
+        if (getLocationType(newLoc) != EntityType.EMPTY) {
+            EntityType collisionDetectionLocType = collisionManager.detectCollision(getLocationType(newLoc), locType);
             setLocationType(newLoc, collisionDetectionLocType);
             setLocationType(previousLoc, collisionDetectionLocType);
             return;
@@ -69,7 +69,7 @@ public class GridManager {
      * @param loc     The location to add the enemy.
      * @param locType The enemy's location type.
      */
-    public void addEnemyToGrid(Location loc, LocationType locType) {
+    public void addEnemyToGrid(Location loc, EntityType locType) {
         Objects.requireNonNull(loc);
         Objects.requireNonNull(locType);
         setLocationType(loc, locType);
@@ -82,15 +82,15 @@ public class GridManager {
      */
     public void clearCell(Location location) {
         Objects.requireNonNull(location);
-        setLocationType(location, LocationType.EMPTY);
+        setLocationType(location, EntityType.EMPTY);
     }
 
-    private LocationType getLocationType(Location location) {
+    private EntityType getLocationType(Location location) {
         Objects.requireNonNull(location);
         return getGrid()[location.getXLoc()][location.getYLoc()];
     }
 
-    private void setLocationType(Location location, LocationType locationType) {
+    private void setLocationType(Location location, EntityType locationType) {
         Objects.requireNonNull(location);
         getGrid()[location.getXLoc()][location.getYLoc()] = locationType;
     }

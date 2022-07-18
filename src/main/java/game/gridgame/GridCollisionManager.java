@@ -1,6 +1,6 @@
 package game.gridgame;
 
-import game.utils.enums.LocationType;
+import game.utils.enums.EntityType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,9 +20,9 @@ public class GridCollisionManager {
      * @param newType The type to replace.
      * @return Location Type.
      */
-    public LocationType detectCollision(LocationType oldType, LocationType newType) {
+    public EntityType detectCollision(EntityType oldType, EntityType newType) {
 
-        LocationType result = detectPlayerCollisions(oldType, newType);
+        EntityType result = detectPlayerCollisions(oldType, newType);
 
         if (result == null) {
             result = detectEffectiveCollisions(oldType, newType);
@@ -32,20 +32,20 @@ public class GridCollisionManager {
             result = detectNonEffectiveCollisions(oldType, newType);
         }
 
-        return result == null ? LocationType.EMPTY : result;
+        return result == null ? EntityType.EMPTY : result;
     }
 
     // Checking if the player hit enemies.
-    private LocationType detectPlayerCollisions(LocationType oldType, LocationType newType) {
+    private EntityType detectPlayerCollisions(EntityType oldType, EntityType newType) {
         Objects.requireNonNull(oldType);
         Objects.requireNonNull(newType);
 
-        if (oldType == LocationType.PLAYER && (newType == LocationType.GHOST || newType == LocationType.RAT)) {
+        if (oldType == EntityType.PLAYER && (newType == EntityType.GHOST || newType == EntityType.RAT)) {
             LOGGER.debug("Oh no you got hit by " + newType);
             return newType;
         }
 
-        if (newType == LocationType.PLAYER && (oldType == LocationType.GHOST || oldType == LocationType.RAT)) {
+        if (newType == EntityType.PLAYER && (oldType == EntityType.GHOST || oldType == EntityType.RAT)) {
             LOGGER.debug("Oh no you got hit by " + oldType);
             return oldType;
         }
@@ -53,39 +53,39 @@ public class GridCollisionManager {
     }
 
     // Checking if the effective spells hit enemies.
-    private LocationType detectEffectiveCollisions(LocationType oldType, LocationType newType) {
+    private EntityType detectEffectiveCollisions(EntityType oldType, EntityType newType) {
         Objects.requireNonNull(oldType);
         Objects.requireNonNull(newType);
 
-        if ((oldType == LocationType.ENERGY && newType == LocationType.GHOST) ||
-            (newType == LocationType.ENERGY && oldType == LocationType.GHOST)) {
+        if ((oldType == EntityType.ENERGY && newType == EntityType.GHOST) ||
+            (newType == EntityType.ENERGY && oldType == EntityType.GHOST)) {
             LOGGER.debug("You destroyed " + newType + " with " + oldType);
-            return LocationType.EMPTY;
+            return EntityType.EMPTY;
         }
 
-        if ((oldType == LocationType.FIRE && newType == LocationType.RAT) ||
-            (newType == LocationType.FIRE && oldType == LocationType.RAT)) {
+        if ((oldType == EntityType.FIRE && newType == EntityType.RAT) ||
+            (newType == EntityType.FIRE && oldType == EntityType.RAT)) {
             LOGGER.debug("You destroyed " + newType + " with " + oldType);
-            return LocationType.EMPTY;
+            return EntityType.EMPTY;
         }
         return null;
     }
 
     // Checking non-effective spells hitting enemies.
-    private LocationType detectNonEffectiveCollisions(LocationType oldType, LocationType newType) {
+    private EntityType detectNonEffectiveCollisions(EntityType oldType, EntityType newType) {
         Objects.requireNonNull(oldType);
         Objects.requireNonNull(newType);
 
-        if ((oldType == LocationType.FIRE && newType == LocationType.GHOST) ||
-            (newType == LocationType.FIRE && oldType == LocationType.GHOST)) {
+        if ((oldType == EntityType.FIRE && newType == EntityType.GHOST) ||
+            (newType == EntityType.FIRE && oldType == EntityType.GHOST)) {
             LOGGER.debug(newType + " does not effect " + oldType);
-            return LocationType.GHOST;
+            return EntityType.GHOST;
         }
 
-        if ((oldType == LocationType.ENERGY && newType == LocationType.RAT) ||
-            (newType == LocationType.ENERGY && oldType == LocationType.RAT)) {
+        if ((oldType == EntityType.ENERGY && newType == EntityType.RAT) ||
+            (newType == EntityType.ENERGY && oldType == EntityType.RAT)) {
             LOGGER.debug(newType + " does not effect " + oldType);
-            return LocationType.RAT;
+            return EntityType.RAT;
         }
         return null;
     }

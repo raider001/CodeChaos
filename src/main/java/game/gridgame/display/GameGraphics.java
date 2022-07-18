@@ -6,7 +6,7 @@ import game.gridgame.ImageStore;
 import game.gridgame.key_processors.MoveProcessor;
 import game.gridgame.key_processors.SpellProcessor;
 import game.utils.Dimensions;
-import game.utils.enums.LocationType;
+import game.utils.enums.EntityType;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -62,7 +62,7 @@ public class GameGraphics extends Canvas {
 
                 for (int i = 0; i < Dimensions.GAME_SIZE; i++) {
                     for (int j = 0; j < Dimensions.GAME_SIZE; j++) {
-                        LocationType gridCase = gridManager.getGrid()[i][j];
+                        EntityType gridCase = gridManager.getGrid()[i][j];
                         Image img = imageStore.getImage(gridCase.getImage());
                         graph.drawImage(img, i * gridUnit, j * gridUnit,Dimensions.GAME_SIZE, Dimensions.GAME_SIZE, null);
                     }

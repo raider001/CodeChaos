@@ -4,7 +4,7 @@ import game.gridgame.GridManager;
 import game.objects.Spell;
 import game.utils.Dimensions;
 import game.utils.Location;
-import game.utils.enums.LocationType;
+import game.utils.enums.EntityType;
 import game.utils.enums.SpellType;
 
 import java.util.TimerTask;
@@ -51,7 +51,7 @@ public class SpellMovementTimerTask extends TimerTask {
     }
 
 
-    private LocationType getLocationType(SpellType spellType) {
-        return spellType == SpellType.ENERGY ? LocationType.ENERGY : LocationType.FIRE;
+    private EntityType getLocationType(SpellType spellType) {
+        return spellType == SpellType.ENERGY ? EntityType.ENERGY : EntityType.FIRE;
     }
 }

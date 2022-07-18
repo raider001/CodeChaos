@@ -5,7 +5,7 @@ import game.objects.Enemy;
 import game.utils.Dimensions;
 import game.utils.Location;
 import game.utils.enums.EnemyType;
-import game.utils.enums.LocationType;
+import game.utils.enums.EntityType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class EnemyGeneratorTimerTask extends TimerTask {
 
     }
 
-    private LocationType getLocationType(EnemyType enemyType) {
-        return enemyType == EnemyType.GHOST ? LocationType.GHOST : LocationType.RAT;
+    private EntityType getLocationType(EnemyType enemyType) {
+        return enemyType == EnemyType.GHOST ? EntityType.GHOST : EntityType.RAT;
     }
 }

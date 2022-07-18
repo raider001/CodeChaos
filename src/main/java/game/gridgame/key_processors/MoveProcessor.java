@@ -5,7 +5,7 @@ import game.objects.Player;
 import game.utils.Dimensions;
 import game.utils.Location;
 import game.utils.enums.Direction;
-import game.utils.enums.LocationType;
+import game.utils.enums.EntityType;
 
 import java.util.Objects;
 
@@ -81,7 +81,7 @@ public record MoveProcessor(GridManager gridManager, Player player) {
 
         Location newPlayerLoc = new Location(futX, futY);
         gridManager.updateGridWithLocType(player.getLocation(),
-                                          newPlayerLoc, LocationType.PLAYER);
+                                          newPlayerLoc, EntityType.PLAYER);
         player.setLocation(newPlayerLoc);
     }
 }

@@ -1,11 +1,9 @@
 package game.utils.enums;
 
-import java.awt.*;
-
 /**
  * Types of cells in the game grid.
  */
-public enum LocationType {
+public enum EntityType {
 
     EMPTY(null),
     PLAYER("mage"),
@@ -16,7 +14,7 @@ public enum LocationType {
 
     private final String image;
 
-    LocationType(String imageLoc) {
+    EntityType(String imageLoc) {
         this.image = imageLoc;
     }
 
