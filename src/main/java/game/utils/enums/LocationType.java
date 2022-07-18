@@ -7,20 +7,20 @@ import java.awt.*;
  */
 public enum LocationType {
 
-    EMPTY(new Color(252, 216, 169)),
-    PLAYER(new Color(128, 207, 17)),
-    GHOST(new Color(250, 254, 254)),
-    RAT(new Color(139, 69, 45)),
-    ENERGY(new Color(106, 13, 173)),
-    FIRE(new Color(255, 0, 0));
+    EMPTY(null),
+    PLAYER("mage"),
+    GHOST("ghost"),
+    RAT("rat"),
+    ENERGY("electricity"),
+    FIRE("fireball");
 
-    private final Color colour;
+    private final String image;
 
-    LocationType(Color colour) {
-        this.colour = colour;
+    LocationType(String imageLoc) {
+        this.image = imageLoc;
     }
 
-    public Color getColour() {
-        return colour;
+    public String getImage() {
+        return image;
     }
 }

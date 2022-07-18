@@ -11,6 +11,7 @@ import game.objects.Player;
 import game.gridgame.timers.EnemyGeneratorTimerTask;
 import game.gridgame.timers.GameRunnerTimerTask;
 
+import java.nio.file.Path;
 import java.util.Timer;
 
 /**
@@ -41,6 +42,12 @@ public class GridGameManager {
         GRID_GAME_MANAGER_INJECTOR.inject(GridManager.class);
         GRID_GAME_MANAGER_INJECTOR.inject(MoveProcessor.class);
         GRID_GAME_MANAGER_INJECTOR.inject(SpellProcessor.class);
+        ImageStore imageStore = GRID_GAME_MANAGER_INJECTOR.inject(ImageStore.class);
+        imageStore.addImage("mage", Path.of("images/mage.png"));
+        imageStore.addImage("ghost", Path.of("images/ghost.png"));
+        imageStore.addImage("rat", Path.of("images/crudeMouse.png"));
+        imageStore.addImage("energy", Path.of("images/electricity.png"));
+        imageStore.addImage("fire", Path.of("images/fireball.png"));
         /*
          TODO - This is a little strange pulling the dependency from one injector to another...
          It may make more sense having the frame containing the canvases to determine which one should be used. rather than

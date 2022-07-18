@@ -2,6 +2,7 @@ package game.gridgame.display;
 
 import game.gridgame.GridManager;
 import game.GameFrame;
+import game.gridgame.ImageStore;
 import game.gridgame.key_processors.MoveProcessor;
 import game.gridgame.key_processors.SpellProcessor;
 import game.utils.Dimensions;
@@ -20,11 +21,12 @@ public class GameGraphics extends Canvas {
     private final GameFrame frame;
     private Graphics graph = null;
     private BufferStrategy strategy = null;
-
-    public GameGraphics(GameFrame gameFrame, GridManager gridManager, MoveProcessor moveProcessor,  SpellProcessor spellProcessor) {
+    private final ImageStore imageStore;
+    public GameGraphics(GameFrame gameFrame, GridManager gridManager, MoveProcessor moveProcessor,  SpellProcessor spellProcessor, ImageStore imageStore) {
         this.gridManager = gridManager;
         frame            = gameFrame;
         keyManager       = new KeyManager(moveProcessor, spellProcessor, frame, this);
+        this.imageStore = imageStore;
     }
 
     public void startGame() {
@@ -53,7 +55,7 @@ public class GameGraphics extends Canvas {
                                                       RenderingHints.VALUE_ANTIALIAS_ON);
 
                 // Draw Background
-                graph.setColor(LocationType.EMPTY.getColour());
+                graph.setColor(Color.GREEN);
                 graph.fillRect(0, 0, Dimensions.getWidth(), Dimensions.getHeight());
 
                 int gridUnit = Dimensions.getHeight() / Dimensions.GAME_SIZE;
@@ -61,9 +63,8 @@ public class GameGraphics extends Canvas {
                 for (int i = 0; i < Dimensions.GAME_SIZE; i++) {
                     for (int j = 0; j < Dimensions.GAME_SIZE; j++) {
                         LocationType gridCase = gridManager.getGrid()[i][j];
-
-                        graph.setColor(gridCase.getColour());
-                        graph.fillRect(i * gridUnit, j * gridUnit, gridUnit, gridUnit);
+                        Image img = imageStore.getImage(gridCase.getImage());
+                        graph.drawImage(img, i * gridUnit, j * gridUnit, null);
                     }
                 }
 

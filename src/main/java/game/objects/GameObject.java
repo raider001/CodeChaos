@@ -9,6 +9,12 @@ public abstract class GameObject {
 
     private Location location;
 
+    private String imageId;
+
+    GameObject(String imageId) {
+
+    }
+
     protected GameObject(Location location) {
         this.location = location;
     }
