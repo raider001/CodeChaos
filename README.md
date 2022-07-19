@@ -53,10 +53,10 @@ You're done!
 ## Roster
 To try to keep tabs on who's turn it is the following is the roster code chaos roster.
 
-| Member                   | Turn  |
-|--------------------------|-------|
-|@BeefSupreme101           |       |
-|@shadowfantasy95          |       |
-|@raider001, Chaos Member 2|  <--  |
-|Martin, Daniel            |       |
+| Member                        | Turn  |
+|-------------------------------|-------|
+|BeefSupreme101                |       |
+|shadowfantasy95               |       |
+|raider001, Automatic-Brocolli |  <--  |
+|Martin, Daniel                |       |
 
