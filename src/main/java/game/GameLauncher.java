@@ -3,6 +3,7 @@ package game;
 import com.kalynx.lwdi.DependencyInjectionException;
 import com.kalynx.lwdi.DependencyInjector;
 import game.gridgame.GridGameManager;
+import game.views.CharacterCreatorView;
 import game.views.MenuView;
 
 /**
@@ -16,8 +17,9 @@ public class GameLauncher {
         GameFrame gameFrame = GAME_LAUNCHER_DI.inject(GameFrame.class);
 
         GAME_LAUNCHER_DI.inject(GridGameManager.class);
+        GAME_LAUNCHER_DI.inject(CharacterCreatorView.class);
         MenuView menuView = GAME_LAUNCHER_DI.inject(MenuView.class);
-        gameFrame.setView(menuView);
+        gameFrame.setView(menuView, "center");
         /*
         Green = player. Move with WASD. Wraps around screen.
         Change spell = Shift. Cast spell = space. Spells do not wrap around screen.

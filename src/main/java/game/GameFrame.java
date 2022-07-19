@@ -7,6 +7,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 /**
  * Provides the basic frame for the game.
@@ -25,15 +27,15 @@ public class GameFrame extends JFrame {
         setBackground(Color.WHITE);
         createBufferStrategy(2);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new MigLayout("","0[]0","0[]0"));
-        JPanel panel = new JPanel(new MigLayout("","0[]0","0[]0"));
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JPanel panel = new JPanel(new MigLayout("","0[grow]0","0[grow]0"));
         setContentPane(panel);
+
     }
 
-    public void setView(Component component) {
+    public void setView(Component component, String constraints) {
         getContentPane().removeAll();
-        getContentPane().add(component, "");
+        getContentPane().add(component, constraints);
         revalidate();
+        repaint();
     }
 }
