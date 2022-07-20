@@ -3,13 +3,16 @@ package game.gridgame.display;
 import game.gridgame.GridManager;
 import game.GameFrame;
 import game.gridgame.ImageStore;
-import game.gridgame.key_processors.MoveProcessor;
-import game.gridgame.key_processors.SpellProcessor;
+import game.gridgame.key_processors.*;
 import game.utils.Dimensions;
+import game.utils.enums.Direction;
 import game.utils.enums.EntityType;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Displays the game.
@@ -17,20 +20,33 @@ import java.awt.image.BufferStrategy;
 public class GameGraphics extends Canvas {
 
     private final GridManager gridManager;
-    private final KeyManager keyManager;
     private final GameFrame frame;
     private Graphics graph = null;
     private BufferStrategy strategy = null;
+    private final MoveProcessor moveProcessor;
+    private final SpellProcessor spellProcessor;
     private final ImageStore imageStore;
     public GameGraphics(GameFrame gameFrame, GridManager gridManager, MoveProcessor moveProcessor,  SpellProcessor spellProcessor, ImageStore imageStore) {
         this.gridManager = gridManager;
         frame            = gameFrame;
-        keyManager       = new KeyManager(moveProcessor, spellProcessor, frame, this);
         this.imageStore = imageStore;
+        this.moveProcessor = moveProcessor;
+        this.spellProcessor = spellProcessor;
     }
 
     public void startGame() {
-        addKeyListener(keyManager);
+
+        KeyManager keyManager = new KeyManager(this);
+        // TODO - Step in the right direction, but this likely won't work when switching between views. Likely to double actions up
+        Map<KeyAction, Runnable> actionMap = new HashMap<>();
+        actionMap.put(new KeyAction(KeyActionEvent.RELEASED, KeyEvent.VK_UP), () ->  moveProcessor.processMove(Direction.UP));
+        actionMap.put(new KeyAction(KeyActionEvent.RELEASED, KeyEvent.VK_DOWN), () -> moveProcessor.processMove(Direction.DOWN));
+        actionMap.put(new KeyAction(KeyActionEvent.RELEASED, KeyEvent.VK_LEFT), () -> moveProcessor.processMove(Direction.LEFT));
+        actionMap.put(new KeyAction(KeyActionEvent.RELEASED, KeyEvent.VK_RIGHT), () -> moveProcessor.processMove(Direction.RIGHT));
+        actionMap.put(new KeyAction(KeyActionEvent.RELEASED, KeyEvent.VK_SPACE), () -> spellProcessor.castSpell());
+        actionMap.put(new KeyAction(KeyActionEvent.RELEASED, KeyEvent.VK_SHIFT), () -> spellProcessor.switchSpell());
+
+        keyManager.setKeyContext(actionMap);
 
         setSize(frame.getSize());
 

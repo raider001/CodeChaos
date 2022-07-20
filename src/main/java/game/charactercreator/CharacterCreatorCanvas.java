@@ -57,7 +57,7 @@ public class CharacterCreatorCanvas extends Canvas {
         if(head != null) {
             graphics.drawImage(head,centerX,centerY,width,height, null);
         }
-
+        requestFocus();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class GameLauncher {
 
     public static void main(String[] args) throws DependencyInjectionException {
         GameFrame gameFrame = GAME_LAUNCHER_DI.inject(GameFrame.class);
-        GAME_LAUNCHER_DI.inject(KeyManager.class);
+//        GAME_LAUNCHER_DI.inject(KeyManager.class);
         GAME_LAUNCHER_DI.inject(GridGameManager.class);
         GAME_LAUNCHER_DI.inject(CharacterCreatorView.class);
         gameFrame.setView(GAME_LAUNCHER_DI.inject(MenuView.class), "center");

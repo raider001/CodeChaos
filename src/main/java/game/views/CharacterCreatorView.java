@@ -29,12 +29,10 @@ public class CharacterCreatorView extends JPanel {
     private final ImageStore imageStore = new ImageStore();
     private static final Logger LOGGER = LogManager.getLogger();
     private final CharacterCreatorCanvas canvas = new CharacterCreatorCanvas();
-    private final KeyManager keyManager;
 
-    public CharacterCreatorView(KeyManager keyManager) throws IOException {
+    public CharacterCreatorView() throws IOException {
         super(new MigLayout("","0[grow, shrink]0","0[grow, shrink]0"));
         add(canvas, "");
-        this.keyManager = keyManager;
         String headLocation = "images/characterparts/head/";
         URL url = getClass().getClassLoader().getResource("images/characterparts/head/");
         File[] files = new File(url.getPath()).listFiles();
@@ -43,34 +41,13 @@ public class CharacterCreatorView extends JPanel {
             heads.add(file.getName());
             imageStore.addImage(file.getName(), Path.of(headLocation, file.getName()));
         }
-//        addComponentListener(new ComponentListener() {
-//            @Override
-//            public void componentResized(ComponentEvent e) {
-//                String head = heads.get((int)(Math.random() * heads.size()));
-//                LOGGER.debug("Showing head:" + head);
-////                canvas.setHead(imageStore.getImage(head), head);
-//            }
-//
-//            @Override
-//            public void componentMoved(ComponentEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void componentShown(ComponentEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void componentHidden(ComponentEvent e) {
-//
-//            }
-//        });
     }
 
    public void initialise() {
+       KeyManager keyManager = new KeyManager(canvas);
        Map<KeyAction, Runnable> actionMap = new HashMap<>();
        actionMap.put(new KeyAction(KeyActionEvent.TYPED, 'a'), () -> {
+           System.out.println("stuff");
            headIndex--;
            if(headIndex < 0) {
                headIndex = heads.size() - 1;
