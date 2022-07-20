@@ -1,8 +1,6 @@
 package game;
 
-import game.GameLauncher;
 import game.utils.Dimensions;
-import game.views.MenuView;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -30,6 +28,30 @@ public class GameFrame extends JFrame {
         JPanel panel = new JPanel(new MigLayout("","0[grow]0","0[grow]0"));
         setContentPane(panel);
 
+        panel.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                revalidate();
+                repaint();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                revalidate();
+                repaint();
+
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
+            }
+        });
     }
 
     public void setView(Component component, String constraints) {

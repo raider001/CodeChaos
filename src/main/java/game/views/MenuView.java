@@ -8,8 +8,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 public class MenuView extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -29,6 +27,7 @@ public class MenuView extends JPanel {
         characterCreatorButton.setText("Character Creator");
         characterCreatorButton.addActionListener(event -> {
            gameFrame.setView(characterCreatorView, "growx, growy");
+           characterCreatorView.initialise();
         });
 
         setBorder(BorderFactory.createLineBorder(Color.BLUE));
